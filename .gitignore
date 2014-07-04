@@ -1,3 +1,5 @@
 MANIFEST
-build	
+build
 dist
+*pyc
+*~
