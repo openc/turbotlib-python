@@ -2,9 +2,7 @@ from __future__ import print_function
 
 import os
 import sys
-
 import yaml
-
 
 # We are running in production if MORPH_URL is set in the environment.
 in_production = bool(os.getenv('MORPH_URL'))
@@ -55,3 +53,6 @@ def _set_up_data_dir(d):
         os.mkdir(d)
     except OSError:
         pass
+
+os.environ["SCRAPERWIKI_DATABASE_NAME"] = "%s/data.sqlite" % data_dir()
+import scraperwiki.sqlite as sql

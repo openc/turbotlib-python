@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='turbotlib',
-    version='0.0.3',
+    version='0.0.4',
     description='Helpers for writing turbot bots.',
     packages=['turbotlib'],
     license='License :: OSI Approved :: MIT License',
