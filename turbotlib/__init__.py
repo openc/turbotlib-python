@@ -54,5 +54,4 @@ def _set_up_data_dir(d):
     except OSError:
         pass
 
-os.environ["SCRAPERWIKI_DATABASE_NAME"] = "%s/data.sqlite" % data_dir()
-import scraperwiki.sqlite as sql
+os.environ["SCRAPERWIKI_DATABASE_NAME"] = "sqlite:///%s/data.sqlite" % data_dir()
