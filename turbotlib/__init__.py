@@ -6,15 +6,16 @@ import yaml
 
 # We are running in production if MORPH_URL is set in the environment.
 in_production = bool(os.getenv('MORPH_URL'))
-
+is_admin = "admin" in os.getenv('USER_ROLES', '').split(",")
 
 def data_dir():
-    if in_production:
-        data_dir = '/data'
+    return _path_to("data")
+
+def source_dir():
+    if (in_production and not is_admin):
+        raise RuntimeError("Only admins are permitted to write to `sources_dir`")
     else:
-        data_dir = 'data'
-        _set_up_data_dir(data_dir)
-    return data_dir
+        return _path_to("source")
 
 def _vars_path():
     return data_dir() + '/_vars.yml'
@@ -35,6 +36,13 @@ def get_var(key):
     except KeyError:
         raise KeyError('No such var: ' + key)
 
+def _path_to(directory):
+    if in_production:
+        directory = '/%s' % directory
+    else:
+        _set_up_dir(directory)
+    return directory
+
 
 def _save_vars(vars):
     with open(_vars_path(), 'w') as f:
@@ -48,7 +56,7 @@ def _get_vars():
     except IOError:
         return {}
 
-def _set_up_data_dir(d):
+def _set_up_dir(d):
     try:
         os.mkdir(d)
     except OSError:
