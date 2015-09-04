@@ -15,7 +15,7 @@ def sources_dir():
     if (in_production and not is_admin):
         raise RuntimeError("Only admins are permitted to write to `sources_dir`")
     else:
-        return _path_to("source")
+        return _path_to("sources")
 
 def _vars_path():
     return data_dir() + '/_vars.yml'
