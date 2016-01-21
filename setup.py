@@ -6,7 +6,7 @@ setup(
     description='Helpers for writing turbot bots.',
     packages=['turbotlib'],
     license='License :: OSI Approved :: MIT License',
-    url='http://github.com/openc/turbot',
+    url='http://github.com/openc/turbotlib-python',
     author='OpenCorporates',
     author_email='support@opencorporates.com'
 )
